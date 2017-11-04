@@ -24,5 +24,7 @@ public interface StudentService
     
     CourseModel selectCourse (String id_course);
     
+    
     List<CourseModel> selectAllCourses ();
+    
 }

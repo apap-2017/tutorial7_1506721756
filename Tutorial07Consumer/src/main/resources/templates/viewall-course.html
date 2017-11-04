@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>View All Student</title>
+		<div th:replace="fragments/fragment :: title"></div>
+		
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+		
+	</head>
+	<body>
+		<div th:replace="fragments/fragment :: header"></div>
+		<h1>All Courses</h1>
+		
+			<div class="container">
+	  		<div class="starter-template">
+	  		<div th:each="course,iterationStatus: ${courses}">
+	            <p th:text="'ID : ' + ${course.id_course}"></p>
+	            <p th:text="'Name : ' + ${course.name}"></p>
+	            <p th:text="'SKS : ' + ${course.credits}"></p>
+				<p>Mahasiswa yang mengambil</p>
+				<ul th:each="student, iterationStatus: ${course.students}">
+					<li th:text="${student.npm} + '-' + ${student.name}" >
+					
+					</li>
+				</ul>
+				<hr/>
+			</div>
+	  		
+
+	
+			</div>
+			</div>
+			
+		<div th:replace="fragments/fragment :: footer"></div>
+	</body>
+</html>
+
+

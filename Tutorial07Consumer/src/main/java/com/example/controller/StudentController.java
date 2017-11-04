@@ -164,4 +164,14 @@ public class StudentController
     	model.addAttribute("title", "Detail Course");
     	return "course";    	
     }
+    
+    @RequestMapping("/course/viewall")
+    public String viewCourse (Model model)
+    {
+        List<CourseModel> courses = studentDAO.selectAllCourses ();
+        model.addAttribute ("courses", courses);
+        model.addAttribute("title", "All Courses");
+        return "viewall-course";
+    }
+
 }

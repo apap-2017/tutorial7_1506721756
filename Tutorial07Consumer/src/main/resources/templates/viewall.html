@@ -2,37 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>View All Student</title>
-		<div th:replace="fragments/fragment :: links"></div>
+		<div th:replace="fragments/fragment :: title"></div>
+		
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+		<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+		
 	</head>
 	<body>
 		<div th:replace="fragments/fragment :: header"></div>
 		<h1>All Students</h1>
-	  		<table id="table_id" class="display">
+		
+			<div class="container">
+	  		<div class="starter-template">
+	  		
+	  		<table id="liststudent" class="table table-striped">
 			    <thead>
 			        <tr>
-			            <th>No</th>
-			            <th>NPM</th>
-			            <th>Name</th>
-			            <th>GPA</th>
-			            <th>Cum laude</th>
-			            <th>Delete</th>
-			            <th>Update</th>
+			            <th class="text-center">No</th>
+			            <th class="text-center">NPM</th>
+			            <th class="text-center">Name</th>
+			            <th class="text-center">GPA</th>
+			            <th class="text-center">Cum laude</th>
+			            <th class="text-center">Delete</th>
+			            <th class="text-center">Update</th>
 			        </tr>
 			    </thead>
 			    <tbody>
-			    	<div th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd}? 'odd'">
-				        <tr>
-				            <td><h3 th:text="'No. ' + ${iterationStatus.count}">No. 1</h3></td>
-				            <td><h3 th:text="'NPM = ' + ${student.npm}">Student NPM</h3></td>
-				            <td><h3 th:text="'Name = ' + ${student.name}">Student Name</h3></td>
-				            <td><h3 th:text="'GPA = ' + ${student.gpa}">Student GPA</h3></td>
-				            <td><h3 th:text="${student.gpa} >= 3.49 ? 'Cum Laude!' : 'Sangat Memuaskan'"></h3></td>
-				            <td><button><a th:href="'/student/delete/' + ${student.npm}" > Delete Data</a></button></td>
-				            <td><button><a th:href="'/student/update/' + ${student.npm}" > Update Data</a></button></td>
+			    	<div>
+				        <tr th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd}? 'odd'">
+				            <td><p class="text-center" th:text="${iterationStatus.count}">No. 1</p></td>
+				            <td><p class="text-center" th:text="${student.npm}">Student NPM</p></td>
+				            <td><p class="text-center" th:text="${student.name}">Student Name</p></td>
+				            <td><p class="text-center" th:text="${student.gpa}">Student GPA</p></td>
+				            <td><p class="text-center" th:text="${student.gpa} >= 3.49 ? 'Cum Laude!' : 'Sangat Memuaskan'"></p></td>
+				            <td class="text-center"><form th:action="'/student/delete/' + ${student.npm}"><button class= 'btn btn-success' type="submit">Delete Data</button></form></td>
+				            <td class="text-center"><form th:action="'/student/update/' + ${student.npm}"><button class= 'btn btn-success' type="submit">Update Data</button></form></td>
 				        </tr>
        				</div>
 			    </tbody>
 			</table>
+
+	
+			</div>
+			</div>
+			
 		<div th:replace="fragments/fragment :: footer"></div>
 	</body>
 </html>
+
+<script>
+	$(document).ready(function() {
+		$('#liststudent').DataTable({
+			  "aoColumnDefs": [
+				  { 'bSortable': false, 'aTargets': [ -1 ] }
+			   ],
+			   "iDisplayLength": 2,
+			   "aLengthMenu": [[2, 4, 6, 8, -1], [2, 4, 6, 8, "All"]]
+			   
+		});
+	} );
+	
+	
+</script>

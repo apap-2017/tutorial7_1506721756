@@ -11,7 +11,7 @@ public interface StudentService
 
 
     List<StudentModel> selectAllStudents ();
-
+    
 
     void addStudent (StudentModel student);
 
@@ -23,4 +23,6 @@ public interface StudentService
     
     
     CourseModel selectCourse (String id_course);
+    
+    List<CourseModel> selectAllCourses ();
 }

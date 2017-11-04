@@ -23,6 +23,7 @@ public class CourseRestController {
 	@RequestMapping("/course/view/{npm}")
 	public CourseModel view (@PathVariable(value = "npm") String npm) {
 		CourseModel course  = studentService.selectCourse (npm);
+		
 		return course;
 	}
 	
